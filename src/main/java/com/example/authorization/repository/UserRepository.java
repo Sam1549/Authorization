@@ -1,6 +1,6 @@
 package com.example.authorization.repository;
 
-import com.example.authorization.model.User;
+import com.example.authorization.model.UserImp;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -8,14 +8,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class UserRepository {
-    private ConcurrentHashMap<User,List<Authorities>> map = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<UserImp, List<Authorities>> map = new ConcurrentHashMap<>();
 
     public UserRepository() {
-        map.put(new User("Admin","1234"),List.of(Authorities.DELETE,Authorities.WRITE,Authorities.READ));
-        map.put(new User("User","1234"),List.of(Authorities.WRITE,Authorities.READ));
+        map.put(new UserImp("Admin", "1234"), List.of(Authorities.DELETE, Authorities.WRITE, Authorities.READ));
+        map.put(new UserImp("User", "1234"), List.of(Authorities.WRITE, Authorities.READ));
     }
 
-    public List<Authorities> getUserAuthorities(User user) {
-        return map.get(user);
+    public List<Authorities> getUserAuthorities(UserImp userImp) {
+        return map.get(userImp);
     }
 }
