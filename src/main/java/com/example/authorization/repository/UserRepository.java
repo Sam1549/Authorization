@@ -15,7 +15,7 @@ public class UserRepository {
         map.put(new User("User","1234"),List.of(Authorities.WRITE,Authorities.READ));
     }
 
-    public List<Authorities> getUserAuthorities(String user, String password) {
-        return map.get(new User(user,password));
+    public List<Authorities> getUserAuthorities(User user) {
+        return map.get(user);
     }
 }

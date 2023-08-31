@@ -2,10 +2,13 @@ package com.example.authorization.controller;
 
 import com.example.authorization.exception.InvalidCredentials;
 import com.example.authorization.exception.UnauthorizedUser;
+import com.example.authorization.model.User;
 import com.example.authorization.repository.Authorities;
 import com.example.authorization.service.AuthorizationService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@Validated
 public class AuthorizationController {
     AuthorizationService service;
 
@@ -22,8 +26,8 @@ public class AuthorizationController {
     }
 
     @GetMapping("/authorize")
-    public List<Authorities> getAuthorities(@RequestParam("user") String user, @RequestParam("password") String password) {
-        return service.getAuthorities(user, password);
+    public List<Authorities> getAuthorities(@Valid User user) {
+        return service.getAuthorities(user);
     }
 
     @ExceptionHandler(InvalidCredentials.class)

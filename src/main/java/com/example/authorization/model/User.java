@@ -1,9 +1,17 @@
 package com.example.authorization.model;
 
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.util.Objects;
 
 public class User {
+    @NotBlank(message = "user can not be empty")
+    @Size(min = 3, max = 20, message = "user must be between 3 and 20 characters")
     private String name;
+    @NotBlank(message = "password can not be empty")
+    @Size(min = 3, max = 20, message = "password must be between 3 and 20 characters")
     private String password;
 
     public User() {
